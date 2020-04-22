@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+    <bean id="testBean" class="bean.TestBean" />
+    <bean id="homework" class="bean.Homework" scope="singleton"/>
+    <bean id="student" class="bean.Student" scope="singleton">
+        <constructor-arg type="java.lang.String" value="zcx"/>
+    </bean>
+    <bean id="studentHomework" class="bean.StudentHomework" scope="singleton"/>
+    <bean id="jdbc" class="jdbc.StudentHomeworkJdbc"/>
+
+
+    <bean id="before" class="controller.before"/>
+    <aop:config>
+        <aop:aspect id="beforeAspect" ref="before">
+
+            <aop:before method="methodBefore" pointcut="execution(public * jdbc.StudentHomeworkJdbc.*(..))"/>
+<!--            第二个是返回类型-->
+<!--            第三个是哪个类下的哪个方法 也可以写*号-->
+<!--            参数(…) 表示任意参数, 也可以没有参数, 无数个参数也可以-->
+        </aop:aspect>
+
+
+
+    </aop:config>
+
+
+
+
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/school" />
+        <property name="username" value="root" />
+        <property name="password" value="123456" />
+    </bean>
+    <context:component-scan base-package="java"/>
+</beans>

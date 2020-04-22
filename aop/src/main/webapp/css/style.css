@@ -1,0 +1,5 @@
+﻿
+.choose{ margin:0 auto; width:400px;border:2px solid #09C7F7;text-align: center;padding: 20px;}
+button{height:50px;width: 150px; font-size: 20px;border:1px solid;border-radius:10px;background-color: #FFFFFF;color: #000000;border-color: #000000;font-weight: 800;}
+.option{height:50px;width: 150px; font-size: 20px;background-color: #FFFFFF;color: #000000;border-color: #000000;font-weight: 800;}
+p{font-size: 50px;}
